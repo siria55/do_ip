@@ -2,6 +2,7 @@
 
 import os
 import json
+from datetime import datetime
 
 GOOGLE = 'google'
 GOOGLE_CLOUD = 'google_cloud'
@@ -22,7 +23,7 @@ for file_dir in os.listdir('source'):
         data = json.load(json_file)
         if GOOGLE in file_dir or GOOGLE_CLOUD in file_dir:
             res = get_google(data)
-            res_file_name = file_dir.split('.')[0] + '_list'
+            res_file_name = file_dir.split('.')[0] + datetime.now().strftime('%Y%m%d')
 
     with open('list/' + res_file_name, 'a') as res_file:
         res_file.writelines([s + '\n' for s in res])
